@@ -25,6 +25,8 @@
       display: flex;
       align-items: center;
       transition: transform 0.3s ease;
+      position: relative;
+      z-index: 101; // Выше, чем мобильное меню
       
       &:hover {
         transform: translateY(-2px);
@@ -75,32 +77,71 @@
       gap: 2rem;
       
       @include respond(mobile) {
-        display: none;
-        position: absolute;
-        top: 100%;
+        display: flex;
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        background-color: color.adjust($alpine-oat, $lightness: 8%);
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.7); // Очень прозрачный белый фон
         flex-direction: column;
-        padding: 1rem 0;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 2rem;
         z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba($alpine-oat, 0.5); // Полупрозрачный фон
+          z-index: -1;
+        }
         
         &.active {
-          display: flex;
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
         }
         
         li {
           width: 100%;
+          text-align: center;
+          transform: translateY(20px);
+          opacity: 0;
+          transition: all 0.3s ease;
+          transition-delay: calc(0.05s * var(--item-index, 0));
+          
+          @for $i from 1 through 6 {
+            &:nth-child(#{$i}) {
+              --item-index: #{$i};
+            }
+          }
           
           a {
             display: block;
-            padding: 0.75rem 2rem;
+            padding: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); // Добавляем тень для лучшей читаемости
             
-            &:hover {
-              background-color: $alpine-oat;
+            &:after {
+              height: 3px;
             }
           }
+        }
+        
+        &.active li {
+          opacity: 1;
+          transform: translateY(0);
         }
       }
       
@@ -153,7 +194,7 @@
         height: 24px;
         position: relative;
         cursor: pointer;
-        z-index: 10;
+        z-index: 101; // Выше, чем мобильное меню
         
         span {
           display: block;
@@ -201,4 +242,20 @@
       }
     }
   }
+  
+  // Блокировка прокрутки при открытом меню
+  &.menu-open {
+    @include respond(mobile) {
+      height: 100vh;
+      overflow: hidden;
+    }
+  }
+}
+
+// Добавляем стили для блокировки прокрутки body
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }

@@ -29,11 +29,15 @@ export function initHeader() {
   // Мобильное меню
   const menuToggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.querySelector('.nav ul');
+  const header = document.querySelector('.header');
+  const body = document.body;
   
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
       menuToggle.classList.toggle('active');
+      header.classList.toggle('menu-open');
+      body.classList.toggle('menu-open');
     });
     
     // Закрытие меню при клике на пункт
@@ -41,7 +45,19 @@ export function initHeader() {
       link.addEventListener('click', () => {
         nav.classList.remove('active');
         menuToggle.classList.remove('active');
+        header.classList.remove('menu-open');
+        body.classList.remove('menu-open');
       });
+    });
+    
+    // Закрытие меню при нажатии Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('active')) {
+        nav.classList.remove('active');
+        menuToggle.classList.remove('active');
+        header.classList.remove('menu-open');
+        body.classList.remove('menu-open');
+      }
     });
   }
 }
