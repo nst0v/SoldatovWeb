@@ -238,12 +238,13 @@ button[type=submit]:hover {
 }
 
 .header {
-  background-color: white;
+  background-color: rgb(252.5593220339, 251.6101694915, 249.4406779661);
   padding: 1rem 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: all 0.3s ease;
 }
 .header .nav {
   max-width: 1200px;
@@ -259,6 +260,46 @@ button[type=submit]:hover {
   color: #D72638;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+.header .nav .logo:hover {
+  transform: translateY(-2px);
+}
+.header .nav .logo .logo-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  position: relative;
+}
+.header .nav .logo .logo-icon:before, .header .nav .logo .logo-icon:after {
+  content: "";
+  position: absolute;
+  background-color: #D72638;
+}
+.header .nav .logo .logo-icon:before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.header .nav .logo .logo-icon:after {
+  width: 2px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+.header .nav .logo .logo-icon .dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #D72638;
+  border-radius: 50%;
+  top: 4px;
+  left: 4px;
 }
 .header .nav ul {
   display: flex;
@@ -271,7 +312,7 @@ button[type=submit]:hover {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: rgb(252.5593220339, 251.6101694915, 249.4406779661);
     flex-direction: column;
     padding: 1rem 0;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -291,17 +332,81 @@ button[type=submit]:hover {
     background-color: #EDE6D6;
   }
 }
+.header .nav ul li a {
+  color: #333;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+.header .nav ul li a:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #D72638;
+  transition: width 0.3s ease;
+}
+.header .nav ul li a:hover {
+  color: #D72638;
+}
+.header .nav ul li a:hover:after {
+  width: 100%;
+}
+.header .nav ul li a.active {
+  color: #D72638;
+}
+.header .nav ul li a.active:after {
+  width: 100%;
+}
 .header .nav .mobile-menu-toggle {
   display: none;
 }
 @media (max-width: 768px) {
   .header .nav .mobile-menu-toggle {
     display: block;
-    font-size: 1.5rem;
     background: none;
     border: none;
-    color: #333;
+    width: 30px;
+    height: 24px;
+    position: relative;
     cursor: pointer;
+    z-index: 10;
+  }
+  .header .nav .mobile-menu-toggle span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #D72638;
+    border-radius: 2px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+  }
+  .header .nav .mobile-menu-toggle span:nth-child(1) {
+    top: 0px;
+  }
+  .header .nav .mobile-menu-toggle span:nth-child(2) {
+    top: 10px;
+  }
+  .header .nav .mobile-menu-toggle span:nth-child(3) {
+    top: 20px;
+  }
+  .header .nav .mobile-menu-toggle.active span:nth-child(1) {
+    top: 10px;
+    transform: rotate(135deg);
+  }
+  .header .nav .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+    left: -60px;
+  }
+  .header .nav .mobile-menu-toggle.active span:nth-child(3) {
+    top: 10px;
+    transform: rotate(-135deg);
   }
 }
 

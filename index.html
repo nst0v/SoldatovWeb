@@ -12,7 +12,12 @@
   <!-- HEADER -->
   <header class="header">
     <nav class="nav">
-      <div class="logo">Nikita.dev</div>
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <span class="dot"></span>
+        </div>
+        Nikita.dev
+      </a>
       <ul>
         <li><a href="#services">Услуги</a></li>
         <li><a href="#portfolio">Портфолио</a></li>
@@ -20,7 +25,9 @@
         <li><a href="#contact">Контакты</a></li>
       </ul>
       <button class="mobile-menu-toggle">
-        <i class="fas fa-bars"></i>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </nav>
   </header>
@@ -259,34 +266,7 @@
   </footer>
 
   <!-- Анимации -->
-  <script>
-    const options = {
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in-view");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, options);
-
-    document.querySelectorAll(".fade-in, .slide-up").forEach(section => {
-      observer.observe(section);
-    });
-    
-    // Мобильное меню
-    const menuToggle = document.querySelector('.mobile-menu-toggle');
-    const nav = document.querySelector('.nav ul');
-    
-    if (menuToggle && nav) {
-      menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
-    }
-  </script>
+  <script type="module" src="assets/js/main.js"></script>
 
 </body>
 </html>

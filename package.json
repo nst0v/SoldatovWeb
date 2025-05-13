@@ -3,17 +3,22 @@
     "version": "1.0.0",
     "description": "Shop for farm",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "sass": "sass assets/scss/main.scss assets/css/main.css",
         "sass:watch": "sass --watch assets/scss/main.scss assets/css/main.css",
         "sass:build": "sass assets/scss/main.scss assets/css/main.css --style compressed",
-        "start": "npm run sass:watch",
-        "build": "npm run sass:build"
+        "start": "browser-sync start --server --files '**/*.html, assets/css/*.css, assets/js/**/*.js'",
+        "dev": "concurrently \"npm run sass:watch\" \"npm run start\"",
+        "build": "npm run sass:build && terser assets/js/main.js -o assets/js/main.min.js"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "sass": "^1.55.0"
+        "browser-sync": "^3.0.4",
+        "concurrently": "^8.2.0",
+        "sass": "^1.55.0",
+        "terser": "^5.19.0"
     },
     "dependencies": {
         "braces": "^3.0.3",
