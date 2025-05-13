@@ -5,8 +5,6 @@ export function initPortfolio() {
     // Инициализация слайдера портфолио
     initPortfolioSlider();
     
-    // Обработка кликов на проекты
-    initProjectLinks();
   }
   
   /**
