@@ -6,6 +6,10 @@
   color: $text-light;
   padding: 4rem 0 2rem;
   
+  @include respond(mobile) {
+    padding: 3rem 0 1.5rem;
+  }
+  
   .footer-container {
     @include container;
     display: grid;
@@ -14,19 +18,50 @@
     
     @include respond(tablet) {
       grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
     }
     
     @include respond(mobile) {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
     
     .footer-col {
+      @include respond(mobile) {
+        position: relative;
+        
+        // Только первая колонка показывается полностью
+        &:not(:first-child) {
+          border-top: 1px solid rgba(white, 0.1);
+          padding-top: 1.25rem;
+        }
+      }
+      
       h3 {
         color: white;
         margin-bottom: 1.5rem;
         font-size: 1.25rem;
         position: relative;
         padding-bottom: 0.75rem;
+        
+        @include respond(mobile) {
+          margin-bottom: 1.25rem;
+          font-size: 1.1rem;
+          padding-bottom: 0.5rem;
+          cursor: pointer; // Для колонок, которые будут сворачиваться
+          
+          // Добавляем стрелку для колонок, которые можно сворачивать
+          &:not(:first-of-type)::before {
+            content: '\f107'; // Unicode для иконки стрелки вниз из Font Awesome
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+          }
+        }
         
         &:after {
           content: '';
@@ -42,6 +77,11 @@
       p {
         color: color.adjust(white, $lightness: -30%);
         margin-bottom: 1rem;
+        line-height: 1.6;
+        
+        @include respond(mobile) {
+          font-size: 0.95rem;
+        }
       }
       
       .social-links {
@@ -70,6 +110,21 @@
       ul {
         list-style: none;
         padding: 0;
+        max-height: 1000px; // Большое значение по умолчанию
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        
+        @include respond(mobile) {
+          // Для всех колонок кроме первой
+          .footer-col:not(:first-child) & {
+            max-height: 0; // Скрываем списки на мобильных по умолчанию
+          }
+          
+          // Когда колонка активна, показываем список
+          .footer-col.active & {
+            max-height: 1000px;
+          }
+        }
         
         li {
           margin-bottom: 0.75rem;
@@ -84,6 +139,13 @@
               color: $cherry-red;
             }
           }
+        }
+      }
+      
+      // Активное состояние для мобильных
+      &.active {
+        h3:not(:first-of-type)::before {
+          transform: rotate(180deg); // Поворачиваем стрелку
         }
       }
     }
@@ -102,6 +164,7 @@
       flex-direction: column;
       gap: 1rem;
       text-align: center;
+      margin-top: 2rem;
     }
     
     p {
@@ -117,6 +180,13 @@
       align-items: center;
       gap: 0.5rem;
       transition: color 0.3s;
+      
+      @include respond(mobile) {
+        background-color: rgba(white, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        margin-top: 0.5rem;
+      }
       
       &:hover {
         color: $cherry-red;

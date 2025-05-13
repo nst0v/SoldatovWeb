@@ -3,7 +3,7 @@ import { initHeader } from './modules/header.js';
 import { initAnimations } from './modules/animations.js';
 import { initPortfolio } from './modules/portfolio.js';
 import { initContact } from './modules/contact.js';
-import { initServices } from './modules/services.js';
+import { initFooter } from './modules/footer.js';
 
 // Инициализация всех модулей при загрузке DOM
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,5 +11,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initPortfolio();
   initContact();
-  initServices(); // Добавляем инициализацию модуля услуг
+  initFooter();
 });

@@ -58,8 +58,14 @@
     
     img {
       max-width: 100%;
-      border-radius: 2px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      height: auto;
+      border-radius: 0; /* Убираем скругление углов */
+      box-shadow: none; /* Убираем тень */
+      border: none; /* Убираем границу */
+      background: transparent; /* Убеждаемся, что фон прозрачный */
+      mix-blend-mode: normal; /* Сбрасываем режим смешивания */
+      filter: none; /* Убираем фильтры */
+      /* Убираем все возможные стили, которые могут создавать видимость границы */
     }
     
     @include respond(mobile) {
