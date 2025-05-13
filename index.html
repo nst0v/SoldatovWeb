@@ -296,54 +296,60 @@
   <section id="contact" class="contact fade-in">
     <div class="section-title">
       <h2>Давайте обсудим ваш проект</h2>
+      <p>Заполните форму ниже, и я свяжусь с вами в ближайшее время</p>
     </div>
     
     <div class="contact-container">
       <div class="contact-info">
-        <h3>Контактная информация</h3>
-        
-        <div class="info-item">
-          <div class="icon">
-            <i class="fas fa-envelope"></i>
+        <div class="info-items-container">
+          <div class="info-item">
+            <div class="icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="details">
+              <h4>Email</h4>
+              <a href="mailto:soldatovprice@gmail.com">soldatovprice@gmail.com</a>
+            </div>
           </div>
-          <div class="details">
-            <h4>Email</h4>
-            <a href="mailto:hello@nikita.dev">hello@nikita.dev</a>
+          
+          <div class="info-item">
+            <div class="icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="details">
+              <h4>Телефон</h4>
+              <a href="tel:+79950212650">+7 (995) 021-26-50</a>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="details">
+              <h4>Локация</h4>
+              <p>Москва, Россия</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="details">
+              <h4>Рабочие часы</h4>
+              <p>Круглосуточно</p>
+            </div>
           </div>
         </div>
         
-        <div class="info-item">
-          <div class="icon">
-            <i class="fas fa-phone"></i>
-          </div>
-          <div class="details">
-            <h4>Телефон</h4>
-            <a href="tel:+79001234567">+7 (900) 123-45-67</a>
-          </div>
-        </div>
-        
-        <div class="info-item">
-          <div class="icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="details">
-            <h4>Локация</h4>
-            <p>Москва, Россия</p>
-          </div>
-        </div>
-        
-        <div class="info-item">
-          <div class="icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <div class="details">
-            <h4>Рабочие часы</h4>
-            <p>Пн-Пт: 10:00 - 19:00</p>
-          </div>
+        <!-- Добавляем изображение письма под контактной информацией -->
+        <div class="contact-letter-image">
+          <img src="assets/img/contacts-web.png" alt="Контактное письмо" />
         </div>
       </div>
       
-      <form>
+      <form id="contact-form">
         <div class="form-group">
           <label for="name">Ваше имя</label>
           <input type="text" id="name" placeholder="Как к вам обращаться" required />
@@ -361,6 +367,8 @@
             <option value="landing">Лендинг</option>
             <option value="corporate">Корпоративный сайт</option>
             <option value="ecommerce">Интернет-магазин</option>
+            <option value="wedding">Свадебный сайт</option>
+            <option value="telegram">Telegram-бот</option>
             <option value="other">Другое</option>
           </select>
         </div>
@@ -403,7 +411,7 @@
       <div class="footer-col">
         <h3>Контакты</h3>
         <ul>
-          <li><a href="mailto:soldatov2234@gmail.com">soldatov2234@gmail.com</a></li>
+          <li><a href="mailto:soldatov2234@gmail.com">soldatovprice@gmail.com</a></li>
           <li><a href="tel:+79950212650">+7 (995) 021-26-50</a></li>
           <li>Москва, Россия</li>
         </ul>
