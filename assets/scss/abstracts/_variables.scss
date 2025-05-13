@@ -1,0 +1,14 @@
+@use "sass:color";
+
+$cherry-red:     #D72638;
+$alpine-oat:     #EDE6D6;
+
+// Обновляем градиенты с использованием современного синтаксиса
+$primary-gradient: linear-gradient(135deg, $cherry-red, color.adjust($cherry-red, $lightness: -15%));
+$soft-gradient: linear-gradient(135deg, $alpine-oat, color.adjust($alpine-oat, $lightness: -10%));
+
+$gray-dark:  #333;
+$gray-light: #f9f7f3; // Светлее для лучшего контраста
+
+$text-dark:  $gray-dark;
+$text-light: #fff;

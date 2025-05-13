@@ -1,0 +1,20 @@
+// First import abstracts (variables, mixins, etc.)
+@use "abstracts/index" as *;
+
+// Then import base styles
+@use "base/index" as *;
+
+// Then components
+@use "components/index" as *;
+
+// Finally sections
+@use "sections/index" as *;
+
+// Individual section imports
+@use "sections/header";
+@use "sections/hero";
+@use "sections/services";
+@use "sections/portfolio";
+@use "sections/about";
+@use "sections/contact";
+@use "sections/footer";

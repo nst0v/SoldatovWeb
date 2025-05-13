@@ -1,110 +1,293 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Никита — веб-разработчик Laravel и сайтов</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Никита Солдатов | Веб-разработка</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
-  <!-- Хедер -->
-  <header>
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">Nikita.dev</div>
+      <ul>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#portfolio">Портфолио</a></li>
+        <li><a href="#about">Обо мне</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+      <button class="mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero fade-in">
     <div class="container">
-      <div class="logo">Никита</div>
-      <nav>
+      <div class="hero-content">
+        <h1>Создаю сайты, которые работают на ваш бизнес</h1>
+        <p>Разработка современных веб-решений с фокусом на конверсию и удобство использования</p>
+        <a href="#contact" class="cta-btn">Обсудить проект</a>
+        <a href="#portfolio" class="secondary-btn">Смотреть работы</a>
+      </div>
+      <div class="hero-image">
+        <img src="https://placehold.co/600x400?text=Разработка+сайтов" alt="Веб-разработка" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services slide-up">
+    <div class="section-title">
+      <h2>Мои услуги</h2>
+    </div>
+    <div class="service-grid">
+      <div class="card">
+        <i class="fas fa-laptop-code icon"></i>
+        <h3>Лендинги</h3>
+        <p>Одностраничные сайты с высокой конверсией для продвижения услуг и продуктов. Адаптивный дизайн для всех устройств.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-sitemap icon"></i>
+        <h3>Корпоративные сайты</h3>
+        <p>Многостраничные сайты с удобной структурой, продуманной навигацией и современным дизайном для вашего бизнеса.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-server icon"></i>
+        <h3>Backend на Laravel</h3>
+        <p>Разработка надежных серверных решений: админ-панели, API, интеграции с внешними сервисами и базами данных.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="portfolio fade-in">
+    <div class="section-title">
+      <h2>Избранные проекты</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="item">
+        <img src="https://placehold.co/600x400?text=Проект+1" alt="Проект 1" />
+        <div class="overlay">
+          <div class="caption">Лендинг для психолога</div>
+          <div class="description">Одностраничный сайт с формой записи и интеграцией с CRM-системой</div>
+          <a href="#" class="view-project">Подробнее</a>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://placehold.co/600x400?text=Проект+2" alt="Проект 2" />
+        <div class="overlay">
+          <div class="caption">Сайт салона красоты</div>
+          <div class="description">Многостраничный сайт с каталогом услуг и онлайн-записью</div>
+          <a href="#" class="view-project">Подробнее</a>
+        </div>
+      </div>
+      <div class="item">
+        <img src="https://placehold.co/600x400?text=Проект+3" alt="Проект 3" />
+        <div class="overlay">
+          <div class="caption">CRM для логистики</div>
+          <div class="description">Внутренняя система управления заказами и маршрутами доставки</div>
+          <a href="#" class="view-project">Подробнее</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-cta">
+      <a href="#" class="button button--secondary">Смотреть все проекты</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about slide-up">
+    <div class="container">
+      <div class="text">
+        <h2>Обо мне</h2>
+        <p>Меня зовут Никита, я веб-разработчик с более чем 5-летним опытом создания эффективных веб-решений. Специализируюсь на разработке с использованием PHP/Laravel и современных фронтенд-технологий.</p>
+        <p>Мой подход — это сочетание функциональности, эстетики и удобства использования. Каждый проект я рассматриваю как возможность создать что-то по-настоящему ценное для клиента и его аудитории.</p>
+        
+        <div class="skills">
+          <span class="skill">PHP</span>
+          <span class="skill">Laravel</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">HTML/CSS</span>
+          <span class="skill">MySQL</span>
+          <span class="skill">Git</span>
+        </div>
+        
+        <a href="#contact" class="button">Связаться со мной</a>
+      </div>
+      <div class="image">
+        <img src="https://placehold.co/500x600?text=Никита" alt="Фото Никиты" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact fade-in">
+    <div class="section-title">
+      <h2>Давайте обсудим ваш проект</h2>
+    </div>
+    
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>Контактная информация</h3>
+        
+        <div class="info-item">
+          <div class="icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="details">
+            <h4>Email</h4>
+            <a href="mailto:hello@nikita.dev">hello@nikita.dev</a>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="details">
+            <h4>Телефон</h4>
+            <a href="tel:+79001234567">+7 (900) 123-45-67</a>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="details">
+            <h4>Локация</h4>
+            <p>Москва, Россия</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="details">
+            <h4>Рабочие часы</h4>
+            <p>Пн-Пт: 10:00 - 19:00</p>
+          </div>
+        </div>
+      </div>
+      
+      <form>
+        <div class="form-group">
+          <label for="name">Ваше имя</label>
+          <input type="text" id="name" placeholder="Как к вам обращаться" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Для связи с вами" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="project">Тип проекта</label>
+          <select id="project">
+            <option value="">Выберите тип проекта</option>
+            <option value="landing">Лендинг</option>
+            <option value="corporate">Корпоративный сайт</option>
+            <option value="ecommerce">Интернет-магазин</option>
+            <option value="other">Другое</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Сообщение</label>
+          <textarea id="message" rows="5" placeholder="Расскажите о вашем проекте" required></textarea>
+        </div>
+        
+        <button type="submit">Отправить заявку</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>Nikita.dev</h3>
+        <p>Создаю современные веб-решения, которые помогают бизнесу расти и развиваться в цифровой среде.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Услуги</h3>
+        <ul>
+          <li><a href="#">Лендинги</a></li>
+          <li><a href="#">Корпоративные сайты</a></li>
+          <li><a href="#">Интернет-магазины</a></li>
+          <li><a href="#">Backend-разработка</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Ссылки</h3>
         <ul>
           <li><a href="#services">Услуги</a></li>
           <li><a href="#portfolio">Портфолио</a></li>
           <li><a href="#about">Обо мне</a></li>
           <li><a href="#contact">Контакты</a></li>
         </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Главный экран -->
-  <section id="hero">
-    <div class="container">
-      <h1>Создаю сайты и веб-сервисы под ключ</h1>
-      <p>Лендинги, корпоративные сайты и мощные проекты на Laravel — для бизнеса, который хочет больше клиентов.</p>
-      <a href="#contact" class="btn">Оставить заявку</a>
-    </div>
-  </section>
-
-  <!-- Блок Услуг -->
-  <section id="services">
-    <div class="container">
-      <h2>Что я делаю</h2>
-      <div class="services-list">
-        <div class="service">
-          <h3>Лендинги</h3>
-          <p>Современные одностраничники, которые продают. Адаптивно и быстро.</p>
-        </div>
-        <div class="service">
-          <h3>Сайты для бизнеса</h3>
-          <p>Корпоративные и многостраничные сайты с админкой, интеграциями и SEO.</p>
-        </div>
-        <div class="service">
-          <h3>Проекты на Laravel</h3>
-          <p>CRM, панели управления, API и сложные веб-приложения. Backend на уровне.</p>
-        </div>
+      </div>
+      
+      <div class="footer-col">
+        <h3>Контакты</h3>
+        <ul>
+          <li><a href="mailto:hello@nikita.dev">hello@nikita.dev</a></li>
+          <li><a href="tel:+79001234567">+7 (900) 123-45-67</a></li>
+          <li>Москва, Россия</li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- Портфолио -->
-  <section id="portfolio">
-    <div class="container">
-      <h2>Портфолио</h2>
-      <div class="portfolio-grid">
-        <!-- Примеры работ -->
-        <div class="portfolio-item">
-          <img src="project1.jpg" alt="Проект 1">
-          <h3>Лендинг для юриста</h3>
-          <p>Простой, чистый дизайн и форма заявки с интеграцией в Telegram.</p>
-        </div>
-        <div class="portfolio-item">
-          <img src="project2.jpg" alt="Проект 2">
-          <h3>CRM-система для агентства</h3>
-          <p>На Laravel: учёт клиентов, заявки, уведомления.</p>
-        </div>
-        <div class="portfolio-item">
-          <img src="project3.jpg" alt="Проект 3">
-          <h3>Сайт для строительной компании</h3>
-          <p>Каталог объектов, форма заказа, адаптивная вёрстка.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Блок "Обо мне" -->
-  <section id="about">
-    <div class="container">
-      <h2>Обо мне</h2>
-      <p>Меня зовут Никита. Я PHP/Laravel-разработчик и делаю сайты под ключ более 3 лет. Работал с бизнесами из разных ниш: от юристов до строительных компаний. Работаю быстро, понятно и всегда нацелен на результат.</p>
-    </div>
-  </section>
-
-  <!-- Контакты -->
-  <section id="contact">
-    <div class="container">
-      <h2>Связаться со мной</h2>
-      <p>Напишите мне в Telegram или отправьте заявку через форму — отвечу в течение часа.</p>
-      <form>
-        <input type="text" name="name" placeholder="Ваше имя" required>
-        <input type="email" name="email" placeholder="Email или Telegram" required>
-        <textarea name="message" placeholder="Расскажите о проекте..." required></textarea>
-        <button type="submit">Отправить</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Подвал -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Никита. Все права защищены.</p>
+    
+    <div class="footer-bottom">
+      <p>© 2023 Никита Солдатов. Все права защищены.</p>
+      <a href="#" class="back-to-top">Наверх <i class="fas fa-arrow-up"></i></a>
     </div>
   </footer>
 
+  <!-- Анимации -->
+  <script>
+    const options = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    document.querySelectorAll(".fade-in, .slide-up").forEach(section => {
+      observer.observe(section);
+    });
+    
+    // Мобильное меню
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('.nav ul');
+    
+    if (menuToggle && nav) {
+      menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+    }
+  </script>
+
 </body>
 </html>
+

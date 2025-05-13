@@ -1,0 +1,19 @@
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @mixin container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  
+  @mixin respond($breakpoint) {
+    @if $breakpoint == tablet {
+      @media (max-width: 992px) { @content; }
+    } @else if $breakpoint == mobile {
+      @media (max-width: 768px) { @content; }
+    }
+  }

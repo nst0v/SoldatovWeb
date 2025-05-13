@@ -1,0 +1,83 @@
+@use "../abstracts" as *;
+
+.services {
+  background: white;
+  padding: 5rem 0;
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .service-grid {
+    @include container;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    @include respond(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(mobile) {
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      background: $alpine-oat;
+      padding: 2.5rem 2rem;
+      border-radius: 2px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background-color: $cherry-red;
+        transition: height 0.3s;
+      }
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        
+        &:before {
+          height: 100%;
+        }
+      }
+
+      h3 {
+        margin-bottom: 1rem;
+        color: $gray-dark;
+        position: relative;
+        padding-bottom: 0.75rem;
+        
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 30px;
+          height: 2px;
+          background-color: $cherry-red;
+        }
+      }
+
+      p {
+        color: $gray-dark;
+      }
+      
+      .icon {
+        font-size: 2.5rem;
+        color: $cherry-red;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+    }
+  }
+}

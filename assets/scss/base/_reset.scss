@@ -1,0 +1,40 @@
+@use "../abstracts/variables" as *;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    color: $gray-dark;
+    background-color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul, ol {
+    list-style: none;
+  }
+  
+  button, input, select, textarea {
+    font: inherit;
+  }
+  
+  section {
+    overflow: hidden;
+  }
+  
