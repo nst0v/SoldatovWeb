@@ -7,105 +7,248 @@
   .section-title {
     text-align: center;
     margin-bottom: 4rem;
+    
+    p {
+      max-width: 600px;
+      margin: 1rem auto 0;
+      color: $gray-dark;
+      font-size: 1.1rem;
+      
+      @include respond(mobile) {
+        font-size: 0.95rem;
+      }
+    }
   }
 
-  .portfolio-grid {
-    @include container;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-
-    @include respond(tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @include respond(mobile) {
-      grid-template-columns: 1fr;
-    }
-
-    .item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 2px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s;
-      
-      &:hover {
-        transform: translateY(-5px);
-        
-        .overlay {
-          opacity: 1;
-        }
-        
-        img {
-          transform: scale(1.05);
-        }
-      }
-
-      img {
-        width: 100%;
-        display: block;
-        transition: transform 0.5s;
-      }
-
-      .overlay {
+  // Контейнер для слайдера
+  .portfolio-slider-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 3rem;
+    
+    // Градиенты по бокам (только для десктопов)
+    @media (min-width: 769px) {
+      &:before, &:after {
+        content: '';
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
+        width: 100px;
         height: 100%;
-        background: rgba($cherry-red, 0.85);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: opacity 0.3s;
-        padding: 2rem;
-        
-        .caption {
-          color: white;
-          font-weight: 700;
-          font-size: 1.25rem;
-          margin-bottom: 1rem;
-          text-align: center;
-        }
-        
-        .description {
-          color: white;
-          text-align: center;
-          margin-bottom: 1.5rem;
-        }
-        
-        .view-project {
-            color: white;
-            border: 2px solid white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 2px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            
-            &:hover {
-              background-color: white;
-              color: $cherry-red;
-            }
-          }
-        }
+        z-index: 2;
+        pointer-events: none;
+      }
+      
+      &:before {
+        left: 0;
+        background: linear-gradient(to right, $alpine-oat, transparent);
+      }
+      
+      &:after {
+        right: 0;
+        background: linear-gradient(to left, $alpine-oat, transparent);
       }
     }
     
-    .portfolio-cta {
-      text-align: center;
-      margin-top: 3rem;
+    // На мобильных устройствах убираем градиенты
+    @include respond(mobile) {
+      &:before, &:after {
+        display: none; // Полностью убираем эффект тумана на мобильных
+      }
+    }
+  }
+  
+  // Слайдер
+  .portfolio-slider {
+    width: 100%;
+    overflow: visible;
+    
+    @include respond(mobile) {
+      overflow: hidden; // Скрываем переполнение на мобильных
+      touch-action: pan-x; // Разрешаем горизонтальные свайпы
+    }
+  }
+  
+  // Трек для движения элементов
+  .portfolio-track {
+    display: flex;
+    will-change: transform;
+    
+    // Базовое состояние без transition для плавной анимации
+    transition: none;
+    
+    // Когда пользователь взаимодействует с слайдером
+    &.touching {
+      transition: transform 0.05s linear;
+    }
+    
+    @include respond(mobile) {
+      padding: 0 1rem; // Добавляем небольшой отступ для лучшей видимости
+    }
+  }
+
+  // Стили для элементов портфолио
+  .item {
+    flex-shrink: 0;
+    width: 450px;
+    height: 400px;
+    margin-right: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    
+    @include respond(tablet) {
+      width: 400px;
+      height: 350px;
+    }
+    
+    @include respond(mobile) {
+      width: 85vw; // Используем viewport width для адаптивности
+      max-width: 320px; // Максимальная ширина
+      height: 320px;
+      margin-right: 1rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
       
-      .button--secondary {
-        display: inline-block;
+      .overlay {
+        opacity: 1;
+      }
+      
+      img {
+        transform: scale(1.05);
+      }
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba($cherry-red, 0.85);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      padding: 3rem;
+      
+      @include respond(mobile) {
+        padding: 1.5rem;
+        
+        // На мобильных показываем оверлей при активном состоянии
+        &:active {
+          opacity: 1;
+        }
+      }
+      
+      .caption {
+        color: white;
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
         
         @include respond(mobile) {
-          width: auto;
+          font-size: 1.25rem;
+          margin-bottom: 0.75rem;
+        }
+      }
+      
+      .description {
+        color: white;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        max-width: 90%;
+        
+        @include respond(mobile) {
+          font-size: 0.9rem;
+          margin-bottom: 1.25rem;
+          line-height: 1.4;
+        }
+      }
+      
+      .view-project {
+        color: white;
+        border: 2px solid white;
+        padding: 0.75rem 2.25rem;
+        border-radius: 3px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        
+        @include respond(mobile) {
+          padding: 0.5rem 1.5rem;
+          font-size: 0.9rem;
+          background-color: white;
+          color: $cherry-red;
+        }
+        
+        &:hover {
+          background-color: white;
+          color: $cherry-red;
+          transform: translateY(-3px);
         }
       }
     }
   }
   
+  .portfolio-cta {
+    text-align: center;
+    margin-top: 4rem;
+    
+    .button--secondary {
+      display: inline-block;
+      padding: 0.85rem 3rem;
+      font-size: 1.15rem;
+      
+      @include respond(mobile) {
+        width: auto;
+        padding: 0.7rem 2.25rem;
+        font-size: 1.05rem;
+      }
+    }
+  }
+  
+  // Добавляем индикаторы для мобильных устройств
+  @include respond(mobile) {
+    .portfolio-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+      gap: 0.5rem;
+      
+      .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: rgba($cherry-red, 0.3);
+        transition: background-color 0.3s, transform 0.3s;
+        cursor: pointer;
+        
+        &.active {
+          background-color: $cherry-red;
+          transform: scale(1.25);
+        }
+      }
+    }
+  }
+}
