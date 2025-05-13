@@ -1,83 +1,663 @@
+@use "sass:color";
 @use "../abstracts" as *;
 
+// Миксин для line-clamp с вендорными префиксами
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines; // Стандартное свойство
+  overflow: hidden;
+}
+
 .services {
-  background: white;
+  background-color: color.adjust($alpine-oat, $lightness: 5%);
   padding: 5rem 0;
+  
+  @include respond(mobile) {
+    padding: 3rem 0;
+  }
 
   .section-title {
     text-align: center;
     margin-bottom: 4rem;
+    
+    @include respond(mobile) {
+      margin-bottom: 2rem;
+    }
+    
+    p {
+      max-width: 600px;
+      margin: 1rem auto 0;
+      color: $gray-dark;
+      font-size: 1.1rem;
+      
+      @include respond(mobile) {
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+      }
+    }
   }
 
-  .service-grid {
+  .services-container {
     @include container;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    
+    @include respond(mobile) {
+      gap: 1.5rem;
+    }
+  }
+  
+  // Разделитель между группами услуг
+  .services-divider {
+    text-align: center;
+    position: relative;
+    margin: 1rem 0;
+    
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      height: 1px;
+      background-color: color.adjust($cherry-red, $alpha: -0.8);
+      width: calc(50% - 120px);
+    }
+    
+    &:before {
+      left: 0;
+    }
+    
+    &:after {
+      right: 0;
+    }
+    
+    span {
+      display: inline-block;
+      background-color: color.adjust($alpine-oat, $lightness: 5%);
+      padding: 0.5rem 1.5rem;
+      font-size: 1.1rem;
+      color: $cherry-red;
+      position: relative;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      
+      &:before, &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: $cherry-red;
+      }
+      
+      &:before {
+        left: -3px;
+      }
+      
+      &:after {
+        right: -3px;
+      }
+    }
+    
+    @include respond(mobile) {
+      margin: 0.5rem 0;
+      
+      &:before, &:after {
+        width: calc(50% - 90px);
+      }
+      
+      span {
+        padding: 0.3rem 1rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+  
+  // Основные услуги - крупные карточки в ряд
+  .services-main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-
+    position: relative;
+    transition: all 0.5s ease;
+    min-height: 300px; // Минимальная высота для предотвращения скачков страницы
+    
     @include respond(tablet) {
       grid-template-columns: repeat(2, 1fr);
     }
-
+    
     @include respond(mobile) {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      min-height: 200px; // Меньшая минимальная высота для мобильных
     }
-
-    .card {
-      background: $alpine-oat;
-      padding: 2.5rem 2rem;
-      border-radius: 2px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-      
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
+    
+    // Стили для активной карточки
+    &.has-active-card {
+      .card-featured:not(.active) {
+        opacity: 0;
+        visibility: hidden;
         height: 0;
-        background-color: $cherry-red;
-        transition: height 0.3s;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: absolute; // Позиционируем абсолютно, чтобы не влиять на поток
+      }
+    }
+    
+    .card-featured {
+      padding: 3rem 2rem;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      display: flex;
+      flex-direction: column;
+      
+      @include respond(mobile) {
+        padding: 1.25rem 1rem;
       }
       
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        
-        &:before {
-          height: 100%;
-        }
+      // Контейнер для основного содержимого карточки
+      .card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
       }
-
-      h3 {
-        margin-bottom: 1rem;
-        color: $gray-dark;
-        position: relative;
-        padding-bottom: 0.75rem;
+      
+      // Кнопка закрытия
+      .close-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: $cherry-red;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.3s ease;
+        z-index: 5;
         
-        &:after {
+        &:hover {
+          background: darken($cherry-red, 10%);
+        }
+        
+        &:before, &:after {
           content: '';
           position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 30px;
+          width: 16px;
           height: 2px;
-          background-color: $cherry-red;
+          background: white;
+          transform-origin: center;
+        }
+        
+        &:before {
+          transform: rotate(45deg);
+        }
+        
+        &:after {
+          transform: rotate(-45deg);
         }
       }
-
-      p {
-        color: $gray-dark;
+      
+      // Стрелка "Подробнее"
+      .expand-indicator {
+        display: inline-flex;
+        align-items: center;
+        margin-top: auto; // Прижимаем к нижней части карточки
+        padding-top: 1rem;
+        color: $cherry-red;
+        font-weight: 500;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        
+        i {
+          margin-left: 0.5rem;
+          transition: transform 0.3s ease;
+        }
+        
+        @include respond(mobile) {
+          font-size: 0.8rem;
+        }
+      }
+      
+      // Дополнительный контент (виден только в развернутом состоянии)
+      .card-extended-content {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.5s ease;
+        margin-top: 0;
+        
+        .extended-text {
+          margin-bottom: 1.5rem;
+        }
+        
+        .features-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 1.5rem 0;
+          
+          li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0.5rem;
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: $cherry-red;
+            }
+          }
+        }
+        
+        .cta-button {
+          display: inline-block;
+          background: $cherry-red;
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 4px;
+          text-decoration: none;
+          font-weight: 500;
+          transition: background 0.3s ease;
+          
+          &:hover {
+            background: darken($cherry-red, 10%);
+          }
+        }
+      }
+      
+      // Активное состояние карточки (развернутое)
+      &.active {
+        grid-column: 1 / -1; // Растягиваем на всю ширину сетки
+        z-index: 2;
+        background: $alpine-oat;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        transform: scale(1.02);
+        position: relative; // Для корректного позиционирования
+        
+        .close-btn {
+          opacity: 1;
+          transform: scale(1);
+        }
+        
+        .expand-indicator {
+          opacity: 0;
+        }
+        
+        .card-extended-content {
+          max-height: 1000px; // Достаточно большое значение
+          opacity: 1;
+          margin-top: 2rem;
+        }
+        
+        p {
+          @include line-clamp(unset);
+          max-height: none;
+        }
+      }
+      
+      &:hover:not(.active) {
+        .expand-indicator {
+          opacity: 1;
+          
+          i {
+            transform: translateX(3px);
+          }
+        }
       }
       
       .icon {
-        font-size: 2.5rem;
-        color: $cherry-red;
-        margin-bottom: 1.5rem;
-        display: block;
+        font-size: 3rem;
+        
+        @include respond(mobile) {
+          font-size: 1.75rem;
+          margin-bottom: 0.75rem;
+        }
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+        
+        @include respond(mobile) {
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+          padding-bottom: 0.5rem;
+          white-space: normal;
+          word-wrap: break-word;
+          hyphens: auto;
+        }
+      }
+      
+      p {
+        transition: all 0.5s ease;
+        flex-grow: 1; // Позволяет параграфу растягиваться
+        min-height: 4.5em; // Минимальная высота для текста (примерно 3 строки)
+        
+        @include respond(mobile) {
+          font-size: 0.85rem;
+          line-height: 1.4;
+          @include line-clamp(2);
+          min-height: 2.8em; // Минимальная высота для текста на мобильных (примерно 2 строки)
+        }
       }
     }
   }
+  
+  // Дополнительные услуги - техническая экспертиза
+  .services-secondary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    background-color: color.adjust($alpine-oat, $lightness: 5%); // Тот же цвет фона, что и у основного блока
+    padding: 2rem;
+    position: relative;
+    min-height: 300px; // Минимальная высота для предотвращения скачков страницы
+    
+    // Убираем обводку и тени
+    border-radius: 0;
+    box-shadow: none;
+    
+    @include respond(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      
+      .card:last-child {
+        grid-column: span 2;
+      }
+    }
+    
+    @include respond(mobile) {
+      grid-template-columns: 1fr;
+      padding: 1.25rem;
+      gap: 1rem;
+      min-height: 200px; // Меньшая минимальная высота для мобильных
+      
+      .card:last-child {
+        grid-column: auto;
+      }
+    }
+    
+    // Стили для активной карточки
+    &.has-active-card {
+      .card:not(.active) {
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: absolute; // Позиционируем абсолютно, чтобы не влиять на поток
+      }
+    }
+    
+    .card {
+      background-color: $alpine-oat; // Тот же цвет фона, что и у основных карточек
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      border: none; // Убираем обводку
+      display: flex;
+      flex-direction: column;
+      
+      // Контейнер для основного содержимого карточки
+      .card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      // Кнопка закрытия
+      .close-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: $cherry-red;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.3s ease;
+        z-index: 5;
+        
+        &:hover {
+          background: darken($cherry-red, 10%);
+        }
+        
+        &:before, &:after {
+          content: '';
+          position: absolute;
+          width: 16px;
+          height: 2px;
+          background: white;
+          transform-origin: center;
+        }
+        
+        &:before {
+          transform: rotate(45deg);
+        }
+        
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }
+      
+      // Стрелка "Подробнее"
+      .expand-indicator {
+        display: inline-flex;
+        align-items: center;
+        margin-top: auto; // Прижимаем к нижней части карточки
+        padding-top: 1rem;
+        color: $cherry-red;
+        font-weight: 500;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        
+        i {
+          margin-left: 0.5rem;
+          transition: transform 0.3s ease;
+        }
+      }
+      
+      // Дополнительный контент
+      .card-extended-content {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.5s ease;
+        margin-top: 0;
+        
+        .extended-text {
+          margin-bottom: 1.5rem;
+        }
+        
+        .features-list {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 1.5rem 0;
+          
+          li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0.5rem;
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background: $cherry-red;
+            }
+          }
+        }
+        
+        .cta-button {
+          display: inline-block;
+          background: $cherry-red;
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 4px;
+          text-decoration: none;
+          font-weight: 500;
+          transition: background 0.3s ease;
+          
+          &:hover {
+            background: darken($cherry-red, 10%);
+          }
+        }
+      }
+      
+      // Активное состояние
+      &.active {
+        grid-column: 1 / -1;
+        z-index: 2;
+        background: $alpine-oat;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        transform: scale(1.02);
+        position: relative; // Для корректного позиционирования
+        
+        .close-btn {
+          opacity: 1;
+          transform: scale(1);
+        }
+        
+        .expand-indicator {
+          opacity: 0;
+        }
+        
+        .card-extended-content {
+          max-height: 1000px;
+          opacity: 1;
+          margin-top: 2rem;
+        }
+        
+        p {
+          @include line-clamp(unset);
+          max-height: none;
+        }
+      }
+      
+      &:hover:not(.active) {
+        .expand-indicator {
+          opacity: 1;
+          
+          i {
+            transform: translateX(3px);
+          }
+        }
+      }
+      
+      @include respond(mobile) {
+        padding: 1.25rem 1rem; // Меньшие внутренние отступы
+        
+        .icon {
+          font-size: 1.75rem; // Меньший размер иконки
+          margin-bottom: 0.75rem; // Меньший отступ под иконкой
+        }
+        
+        h3 {
+          font-size: 1rem; // Меньший размер заголовка
+          margin-bottom: 0.5rem; // Меньший отступ под заголовком
+          padding-bottom: 0.5rem; // Меньший отступ для линии
+          white-space: normal; // Разрешаем перенос слов
+          word-wrap: break-word; // Разрешаем перенос длинных слов
+          hyphens: auto; // Добавляем переносы
+          
+          &:after {
+            width: 20px; // Меньшая ширина линии
+          }
+        }
+        
+        p {
+          font-size: 0.85rem; // Меньший размер текста
+          line-height: 1.4; // Меньший межстрочный интервал
+          // Ограничиваем высоту текста для компактности
+          @include line-clamp(4);
+          min-height: 5.6em; // Минимальная высота для текста на мобильных (примерно 4 строки)
+        }
+      }
+    }
+  }
+
+  .card {
+    background: $alpine-oat;
+    padding: 2.5rem 2rem;
+    border-radius: 2px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background-color: $cherry-red;
+      transition: height 0.3s;
+    }
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      
+      &:before {
+        height: 100%;
+      }
+    }
+
+    h3 {
+      margin-bottom: 1rem;
+      color: $gray-dark;
+      position: relative;
+      padding-bottom: 0.75rem;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 2px;
+        background-color: $cherry-red;
+      }
+    }
+
+    p {
+      color: $gray-dark;
+    }
+    
+    .icon {
+      font-size: 2.5rem;
+      color: $cherry-red;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+  }
 }
+
