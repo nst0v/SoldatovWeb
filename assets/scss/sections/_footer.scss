@@ -104,6 +104,43 @@
             background-color: $cherry-red;
             transform: translateY(-3px);
           }
+
+          // Специальные стили для GitHub
+          &[aria-label="GitHub"] {
+            &:hover {
+              background-color: #5F4B8B; // Фиолетовый цвет для GitHub
+            }
+          }
+          
+          // Специальные стили для Telegram
+          &[aria-label="Telegram"] {
+            &:hover {
+              background-color: #0088cc; // Фирменный синий цвет Telegram
+            }
+          }
+          
+          // Специальные стили для иконки hh.ru
+          &[aria-label="Резюме на hh.ru"] {
+            font-size: 0.9em; // Немного уменьшаем размер иконки документа
+            
+            &:hover {
+              background-color: #e1011c; // Фирменный красный цвет hh.ru
+            }
+          }
+          
+          // Специальные стили для WhatsApp
+          &[aria-label="WhatsApp"] {
+            &:hover {
+              background-color: #25D366; // Фирменный зеленый цвет WhatsApp
+            }
+          }
+          
+          // Специальные стили для VK
+          &[aria-label="VK"] {
+            &:hover {
+              background-color: #4C75A3; // Фирменный синий цвет VK
+            }
+          }
         }
       }
       

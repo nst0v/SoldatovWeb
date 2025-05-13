@@ -1,91 +1,83 @@
 /**
- * Инициализация функциональности интерактивных карточек услуг
+ * Инициализация функциональности раздела услуг
  */
 export function initServices() {
-    const cards = document.querySelectorAll('.card-featured, .services-secondary .card');
-    const mainGrid = document.querySelector('.services-main');
-    const secondaryGrid = document.querySelector('.services-secondary');
+    // Обработка кликов по карточкам услуг
+    const serviceCards = document.querySelectorAll('.services .card');
     
-    if (!cards.length) return;
-    
-    cards.forEach(card => {
-      // Обработчик клика по карточке
-      card.addEventListener('click', function(e) {
-        // Если клик был по кнопке закрытия, закрываем карточку
-        if (e.target.closest('.close-btn')) {
-          closeCard(this);
-          e.stopPropagation();
-          return;
-        }
+    if (serviceCards.length > 0) {
+      serviceCards.forEach(card => {
+        // Находим индикатор "Подробнее"
+        const expandIndicator = card.querySelector('.expand-indicator');
         
-        // Если клик был по кнопке CTA, не открываем/закрываем карточку
-        if (e.target.closest('.cta-button')) {
-          e.stopPropagation();
-          return;
-        }
-        
-        // Если карточка уже активна, закрываем её
-        if (this.classList.contains('active')) {
-          closeCard(this);
-        } else {
-          // Закрываем все открытые карточки
-          cards.forEach(c => {
-            if (c.classList.contains('active')) {
-              closeCard(c);
+        if (expandIndicator) {
+          card.addEventListener('click', () => {
+            // Проверяем, не активна ли уже карточка
+            if (!card.classList.contains('active')) {
+              // Находим родительский контейнер
+              const container = card.closest('.services-main') || card.closest('.services-secondary');
+              
+              // Добавляем класс, указывающий, что есть активная карточка
+              if (container) {
+                container.classList.add('has-active-card');
+              }
+              
+              // Активируем карточку
+              card.classList.add('active');
+              
+              // Находим кнопку закрытия
+              const closeBtn = card.querySelector('.close-btn');
+              
+              if (closeBtn) {
+                // Добавляем обработчик для кнопки закрытия
+                closeBtn.addEventListener('click', (e) => {
+                  e.stopPropagation(); // Предотвращаем всплытие события
+                  
+                  // Удаляем класс активности с карточки
+                  card.classList.remove('active');
+                  
+                  // Удаляем класс, указывающий на наличие активной карточки
+                  if (container) {
+                    container.classList.remove('has-active-card');
+                  }
+                });
+              }
+            } else {
+              // Если карточка уже активна, то закрываем её при клике в любом месте
+              // Находим родительский контейнер
+              const container = card.closest('.services-main') || card.closest('.services-secondary');
+              
+              // Удаляем класс активности с карточки
+              card.classList.remove('active');
+              
+              // Удаляем класс, указывающий на наличие активной карточки
+              if (container) {
+                container.classList.remove('has-active-card');
+              }
             }
           });
-          
-          // Открываем текущую карточку
-          openCard(this);
         }
       });
-    });
-    
-    // Закрытие карточек при клике вне их области
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.card-featured') && !e.target.closest('.services-secondary .card')) {
-        cards.forEach(card => {
-          if (card.classList.contains('active')) {
-            closeCard(card);
-          }
-        });
-      }
-    });
-    
-    // Функция открытия карточки
-    function openCard(card) {
-      card.classList.add('active');
-      
-      // Определяем, к какой группе относится карточка
-      const isMainCard = card.closest('.services-main');
-      
-      if (isMainCard) {
-        mainGrid.classList.add('has-active-card');
-      } else if (secondaryGrid) {
-        secondaryGrid.classList.add('has-active-card');
-      }
     }
     
-    // Функция закрытия карточки
-    function closeCard(card) {
-      card.classList.remove('active');
-      
-      // Определяем, к какой группе относится карточка
-      const isMainCard = card.closest('.services-main');
-      
-      if (isMainCard) {
-        mainGrid.classList.remove('has-active-card');
-      } else if (secondaryGrid) {
-        secondaryGrid.classList.remove('has-active-card');
-      }
-    }
-    
-    // Обработка клавиши Escape для закрытия активной карточки
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        cards.forEach(card => {
-          if (card.classList.contains('active')) {
-            closeCard(card);
+    // Добавляем обработчик для закрытия карточки при клике вне её
+    document.addEventListener('click', (e) => {
+      // Проверяем, не является ли цель клика или её родитель активной карточкой
+      if (!e.target.closest('.card.active')) {
+        // Находим все активные карточки
+        const activeCards = document.querySelectorAll('.services .card.active');
+        
+        // Закрываем все активные карточки
+        activeCards.forEach(activeCard => {
+          // Находим родительский контейнер
+          const container = activeCard.closest('.services-main') || activeCard.closest('.services-secondary');
+          
+          // Удаляем класс активности с карточки
+          activeCard.classList.remove('active');
+          
+          // Удаляем класс, указывающий на наличие активной карточки
+          if (container) {
+            container.classList.remove('has-active-card');
           }
         });
       }

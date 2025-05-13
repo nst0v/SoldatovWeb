@@ -1623,6 +1623,24 @@ body.menu-open {
   background-color: #D72638;
   transform: translateY(-3px);
 }
+.footer .footer-container .footer-col .social-links a[aria-label=GitHub]:hover {
+  background-color: #5F4B8B;
+}
+.footer .footer-container .footer-col .social-links a[aria-label=Telegram]:hover {
+  background-color: #0088cc;
+}
+.footer .footer-container .footer-col .social-links a[aria-label="Резюме на hh.ru"] {
+  font-size: 0.9em;
+}
+.footer .footer-container .footer-col .social-links a[aria-label="Резюме на hh.ru"]:hover {
+  background-color: #e1011c;
+}
+.footer .footer-container .footer-col .social-links a[aria-label=WhatsApp]:hover {
+  background-color: #25D366;
+}
+.footer .footer-container .footer-col .social-links a[aria-label=VK]:hover {
+  background-color: #4C75A3;
+}
 .footer .footer-container .footer-col ul {
   list-style: none;
   padding: 0;
