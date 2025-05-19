@@ -5,6 +5,7 @@ import { initPortfolio } from './modules/portfolio.js';
 import { initContact } from './modules/contact.js';
 import { initFooter } from './modules/footer.js';
 import { initServices } from './modules/services.js';
+import {initForm} from './modules/form.js';
 
 // Инициализация всех модулей при загрузке DOM
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,4 +15,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact();
   initFooter();
   initServices();
+  initForm();
 });

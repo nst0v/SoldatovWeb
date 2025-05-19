@@ -7,6 +7,7 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/notifications.css">
 </head>
 <body>
 
@@ -369,26 +370,26 @@
           </div>
         </div>
         
-        <!-- Добавляем изображение письма под контактной информацией -->
+      <!-- Добавляем изображение письма под контактной информацией -->
         <div class="contact-letter-image">
           <img src="assets/img/contacts-web.png" alt="Контактное письмо" />
         </div>
       </div>
       
-      <form id="contact-form">
+      <form id="contact-form" method="post">
         <div class="form-group">
           <label for="name">Ваше имя</label>
-          <input type="text" id="name" placeholder="Как к вам обращаться" required />
+          <input type="text" id="name" name="name" placeholder="Как к вам обращаться" required />
         </div>
         
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="Для связи с вами" required />
+          <input type="email" id="email" name="email" placeholder="Для связи с вами" required />
         </div>
         
         <div class="form-group">
           <label for="project">Тип проекта</label>
-          <select id="project">
+          <select id="project" name="project">
             <option value="">Выберите тип проекта</option>
             <option value="landing">Лендинг</option>
             <option value="corporate">Корпоративный сайт</option>
@@ -401,11 +402,11 @@
         
         <div class="form-group">
           <label for="message">Сообщение</label>
-          <textarea id="message" rows="5" placeholder="Расскажите о вашем проекте" required></textarea>
+          <textarea id="message" name="message" rows="5" placeholder="Расскажите о вашем проекте" required></textarea>
         </div>
         
         <button type="submit">Отправить заявку</button>
-      </form>
+      </form>                 
     </div>
   </section>
 
