@@ -1,0 +1,49 @@
+name: Verify SAYTMSK
+on:
+  push:
+    branches: [main, 'work/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test tools
+        run: |
+          python -m pip install playwright==1.57.0 Pillow==11.3.0
+          python -m playwright install --with-deps chromium
+          php -v
+      - name: Capture actual demo sites
+        run: python scripts/capture-work.py
+      - name: Build and check generated pages
+        run: npm run check
+      - name: Check PHP guards without sending messages
+        run: |
+          php -l public/api/contact.php
+          python tests/backend.py
+      - name: Check browser over HTTP
+        env:
+          BROWSER_HTTP: '1'
+        run: python tests/browser.py
+      - name: Package website
+        run: python scripts/package.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: saytmsk-preview
+          path: artifacts/
+          retention-days: 14
+          if-no-files-found: error
