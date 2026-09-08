@@ -43,6 +43,21 @@ jobs:
               shutil.rmtree('.bootstrap')
           else:
               assert Path('package.json').exists(), 'Sources are missing'
+          test = Path('tests/browser.py')
+          text = test.read_text()
+          old = "    for image in page.locator('img').all(): assert image.evaluate('(e)=>e.complete && e.naturalWidth>0'),f'{label}: image failed'"
+          new = "\n".join([
+              '    # Real portfolio images load lazily; bring each into view before testing decoding.',
+              "    for image in page.locator('img').all():",
+              '        image.scroll_into_view_if_needed()',
+              "        page.wait_for_function('(e)=>e.complete && e.naturalWidth>0', arg=image.element_handle(), timeout=10000)",
+              "        assert image.evaluate('(e)=>e.complete && e.naturalWidth>0'),f'{label}: image failed'",
+              "    page.evaluate('window.scrollTo(0,0)')",
+          ])
+          if old in text:
+              test.write_text(text.replace(old, new))
+          else:
+              assert new in text, 'Browser test patch target changed'
           PY
       - name: Install test tools
         run: |
