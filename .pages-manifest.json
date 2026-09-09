@@ -1,0 +1,21 @@
+[
+  ".nojekyll",
+  "404.html",
+  "app.js",
+  "assets/amur.webp",
+  "assets/bezvmyatin.webp",
+  "assets/cubes.webp",
+  "assets/favicon.svg",
+  "index.html",
+  "robots.txt",
+  "services/analitika/index.html",
+  "services/dorabotka-saita/index.html",
+  "services/integracii/index.html",
+  "services/internet-magazin/index.html",
+  "services/lending/index.html",
+  "services/podderzhka/index.html",
+  "services/reklama/index.html",
+  "services/sait-kompanii/index.html",
+  "services/seo/index.html",
+  "styles.css"
+]
