@@ -3,10 +3,11 @@
   "description": "SAYTMSK — разработка, продвижение и поддержка сайтов",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "pages": "node scripts/pages.mjs",
     "dev": "node scripts/build.mjs && node scripts/serve.mjs",
     "test": "node scripts/build.mjs && node --test tests/site.test.mjs",
     "test:browser": "python3 tests/browser.py",
-    "check": "node --check public/app.js && node --check scripts/build.mjs && npm test"
+    "check": "node --check public/app.js && node --check scripts/build.mjs && node --check scripts/pages.mjs && npm test"
   },
   "engines": {"node": ">=22"}
 }

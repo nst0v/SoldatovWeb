@@ -6,9 +6,10 @@ Read README.md and docs/ before editing. This repository replaces the legacy Sol
 - Node 22+, zero npm dependencies. `npm run build`, `npm run dev`, `npm run check`.
 - `python tests/backend.py`, `python tests/browser.py` (offline), `BROWSER_HTTP=1 python tests/browser.py` (HTTP).
 - `python scripts/package.py` produces the deployable archive.
+- After editing sources, run `npm run check` then `npm run pages` and commit the generated root snapshot for the existing GitHub Pages main/root publication. See docs/github-pages.md. The preview always stays noindex and uses email-draft mode.
 
 ## Source of truth
-Edit src/content.mjs for text and services, src/render.mjs for components, public/styles.css and public/app.js for UI. Never hand-edit generated dist/.
+Edit src/content.mjs for text and services, src/render.mjs for components, public/styles.css and public/app.js for UI. Never hand-edit generated dist/ or the root snapshot listed in .pages-manifest.json.
 
 ## Brand
 SAYT■MSK, orange separator. Background #F8F5EF, dark ink #0F172A, orange #FF8A00, blue accents. Approved cube atlas: no faces, hands, feet or mascots. Do not replace with random clipart. No font files in deliverables.
